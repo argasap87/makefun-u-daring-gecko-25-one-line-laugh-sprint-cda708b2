@@ -10,6 +10,11 @@ import { dirname, join } from "node:path";
 const LINE =
   "I set my alarm to ocean waves so I'd wake up peaceful, and now I start every morning checking whether the flat is flooding.";
 
+// Gate guard: the entry must stay one line of 1-200 chars, or fail loudly.
+if (LINE.length < 1 || LINE.length > 200 || /\n/.test(LINE)) {
+  throw new Error(`entry must be 1-200 chars on one line, got ${LINE.length}`);
+}
+
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 const outFile = join(outDir, "entry.txt");
 
